@@ -1,0 +1,23 @@
+{
+  "name": "cardsagainsthumanity",
+  "version": "1.0.0",
+  "description": "Desktop app for the famous party game Cards Against Humanity",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "\"\""
+  },
+  "keywords": [
+    "Cards",
+    "Against",
+    "Humanity"
+  ],
+  "author": "Ninad Kulkarni and Bader Alrifai",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^8.2.0"
+  }
+}
