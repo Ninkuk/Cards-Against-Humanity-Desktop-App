@@ -9,11 +9,11 @@ body {
 }
 
 header {
-    position: absolute;
     top: 0;
-    width: 100%;
+    width: 90%;
     height: 45px;
     -webkit-app-region: drag;
+    /* background-color: blue; */
 }
 
 #game-title {
@@ -27,7 +27,7 @@ header {
 .buttons {
     position: absolute;
     right: 10%;
-    top: 45%;
+    top: 40%;
 }
 
 button {

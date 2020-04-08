@@ -5,25 +5,29 @@
     <meta charset="UTF-8">
     <title>Cards Against Humanity Desktop App</title>
     <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <header class="header"></header>
+
     <h1 id="game-title">Cards<br>Against<br>Humanity</h1>
     <div class="buttons">
         <button class="" id="join-game">Join Game</button>
-        <p class="text-white text-center">or</p>
+        <p class="text-white text-center" style="margin: 15px 0px;">or</p>
         <button class="" id="create-game">Create Game</button>
     </div>
-    <img id="close-btn" onclick="closeWindow()" src="https://img.icons8.com/ios-glyphs/24/ffffff/multiply.png"
-        alt="close button" />
-    <img id="min-btn" onclick="minimizeWindow()" src="https://img.icons8.com/material-rounded/24/ffffff/minus.png"
-        alt="minimize button" />
-    <header class="header"></header>
-    
+    <span class="material-icons" id="close-btn" style="color: #FFFFFF;">clear</span>
+    <span class="material-icons" id="min-btn" style="color: #FFFFFF;">remove</span>
+
+
     <script src="main.js"></script>
     <script src="app.js"></script>
+    <script>
+        require('./renderer.js')
+    </script>
 </body>
 
 </html>
