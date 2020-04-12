@@ -1,7 +1,13 @@
+#back-btn {
+    position: absolute;
+    left: 20px;
+    top: 55px;
+}
+
 #page-title {
     position: absolute;
     top: 50px;
-    left: 50px;
+    left: 69px;
 }
 
 #card-sets {
@@ -29,4 +35,21 @@ button {
 
 .selectedOption{
     border: 2px solid #00bfa5;
+}
+
+#continue-btn {
+    cursor: pointer;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 200px;
+    font-size: 100%;
+    background-color: #00bfa5;
+    color: #FFFFFF;
+    border: none;
+
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    /* display: none; */
 }

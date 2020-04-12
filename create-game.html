@@ -13,10 +13,15 @@
     <header class="header"></header>
     <span class="material-icons" id="close-btn" style="color: #FFFFFF;">clear</span>
     <span class="material-icons" id="min-btn" style="color: #FFFFFF;">remove</span>
+    <span class="material-icons" onclick="javascript:history.back()" id="back-btn"
+        style="color: #FFFFFF; cursor: pointer;">keyboard_backspace</span>
+
 
     <h1 id="page-title">Create Game</h1>
 
     <div id="card-sets"></div>
+
+    <button id="continue-btn" onclick="window.location.href='gameplay.html'">Continue</button>
 
 
     <script src="js/main.js"></script>
@@ -62,6 +67,7 @@
             } else {
                 clickedElement.setAttribute('class', 'selectedOption');
 
+                //add selected set to an arraylist
                 //Continue button check
                 //base pack check
                 //...other checks

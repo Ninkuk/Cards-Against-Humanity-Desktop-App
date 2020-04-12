@@ -1,0 +1,88 @@
+.black-card {
+    position: absolute;
+    top: 50px;
+    left: 30px;
+
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: #212121;
+    padding: 15px;
+}
+
+#score-card {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: #212121;
+    padding: 15px;
+}
+
+#score-card h1{
+    position: relative;
+    text-align: center;
+    top: 45px;
+    font-size: 500%;
+}
+
+.white-card {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: #F5F5F5;
+    padding: 15px;
+    margin: 0px;
+    
+    box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.75);
+
+    transition: all 0.3s ease;
+}
+
+.black-card p {
+    color: #FFFFFF;
+    font-size: 100%;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+#score-card p {
+    color: #FFFFFF;
+    font-size: 100%;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.white-card p {
+    color: #000000;
+    font-size: 100%;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+#player-cards-row-1 {
+    position: absolute;
+    bottom: 50px;
+    left: 30px;
+}
+
+#player-cards-row-2 {
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+}
+
+#player-cards-row-1 .white-card:hover {
+    transform: translateY(-100px);
+    animation-duration: 0.5s;
+}
+
+#player-cards-row-2 .white-card:hover {
+    transform: translateY(-10px);
+    animation-duration: 0.5s;
+}
