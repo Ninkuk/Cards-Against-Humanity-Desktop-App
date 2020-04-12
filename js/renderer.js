@@ -1,7 +1,6 @@
 const{ remote, ipcRenderer} = require('electron')
 
 document.getElementById('close-btn').addEventListener('click', () => {
-
     remote.getCurrentWindow().close()
 })
 

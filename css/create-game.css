@@ -1,0 +1,32 @@
+#page-title {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+
+#card-sets {
+    width: 95%;
+    margin: auto;
+    margin-top: 69px;
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 5px;
+    /* width: 200px; */
+    font-size: 100%;
+
+
+    background-color: #000000;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+
+    transition: all 0.3s ease;
+}
+
+.selectedOption{
+    border: 2px solid #00bfa5;
+}

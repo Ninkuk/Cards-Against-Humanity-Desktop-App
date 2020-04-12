@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    color: #FFFFFF;
 }
 
 body {
@@ -16,38 +17,16 @@ header {
     /* background-color: blue; */
 }
 
-#game-title {
-    position: absolute;
+.text-white {
     color: #FFFFFF;
-    font-size: 500%;
-    top: 30%;
-    left: 10%;
 }
 
-.buttons {
-    position: absolute;
-    right: 10%;
-    top: 40%;
-}
-
-button {
-    cursor: pointer;
-    padding: 10px 40px;
-    border-radius: 5px;
-    width: 200px;
-    font-size: 100%;
-
-
-    background-color: #000000;
-    color: #FFFFFF;
-    border: 2px solid #FFFFFF;
-
-    transition: all 0.3s ease;
-}
-
-button:hover {
-    background-color: #FFFFFF;
+.text-white {
     color: #000000;
+}
+
+.text-center {
+    text-align: center;
 }
 
 #close-btn {
@@ -69,7 +48,3 @@ button:hover {
 #close-btn:hover {
     cursor: pointer;
 }
-
-#join-game {}
-
-#create-game {}

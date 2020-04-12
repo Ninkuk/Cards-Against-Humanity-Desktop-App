@@ -2,7 +2,7 @@
   "name": "cardsagainsthumanity",
   "version": "1.0.0",
   "description": "Desktop app for the famous party game Cards Against Humanity",
-  "main": "main.js",
+  "main": "js/main.js",
   "scripts": {
     "start": "electron ."
   },

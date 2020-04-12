@@ -4,29 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Cards Against Humanity Desktop App</title>
-    <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet"
+        href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+        integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 
 <body>
     <header class="header"></header>
-
-    <h1 id="game-title">Cards<br>Against<br>Humanity</h1>
-    <div class="buttons">
-        <button class="" id="join-game">Join Game</button>
-        <p class="text-white text-center" style="margin: 15px 0px;">or</p>
-        <button class="" id="create-game">Create Game</button>
-    </div>
     <span class="material-icons" id="close-btn" style="color: #FFFFFF;">clear</span>
     <span class="material-icons" id="min-btn" style="color: #FFFFFF;">remove</span>
 
+    <h1 id="game-title">Cards<br>Against<br>Humanity</h1>
+    <div class="buttons">
+        <button onclick="window.location.href='join-game.html'" id="join-game">Join Game</button>
+        <p class="text-white text-center" style="margin: 15px 0px;">or</p>
+        <button onclick="window.location.href='create-game.html'" id="create-game">Create Game</button>
+    </div>
 
-    <script src="main.js"></script>
-    <script src="app.js"></script>
+
+    <script src="js/main.js"></script>
+    <!-- <script src="app.js"></script> -->
     <script>
-        require('./renderer.js')
+        require('./js/renderer.js')
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+        integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous">
+    </script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+        integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('body').bootstrapMaterialDesign();
+        });
     </script>
 </body>
 

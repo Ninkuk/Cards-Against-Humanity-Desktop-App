@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Game</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/create-game.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header class="header"></header>
+    <span class="material-icons" id="close-btn" style="color: #FFFFFF;">clear</span>
+    <span class="material-icons" id="min-btn" style="color: #FFFFFF;">remove</span>
+
+    <h1 id="page-title">Create Game</h1>
+
+    <div id="card-sets"></div>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        require('./js/renderer.js')
+    </script>
+
+    <script>
+        var cardSets = ["Base Set", "The First Expansion", "The Second Expansion", "The Third Expansion",
+            "The Fourth Expansion", "The Fifth Expansion", "The Sixth Expansion", "Green Box Expansion",
+            "90s Nostalgia Pack", "Box Expansion", "Fantasy Pack", "Food Pack", "Science Pack",
+            "World Wide Web Pack", "Vote for Hillary Pack", "Vote for Trump Pack", "Trump Survival Pack",
+            "2012 Holiday Pack", "2013 Holiday Pack", "PAX East 2013", "PAX Prime 2013", "PAX East 2014",
+            "PAX East 2014 Panel Pack", "PAX Prime 2014 Panel Pack", "PAX Prime 2015 Food Packs",
+            "House of Cards Against Humanity", "Reject Pack", "Reject Pack 2", "Canadian",
+            "Misprint Replacement Bonus Cards"
+        ];
+
+        var cardSetId = ["Base", "CAHe1", "CAHe2", "CAHe3", "CAHe4", "CAHe5", "CAHe6", "greenbox", "90s", "Box",
+            "fantasy", "food", "science", "www", "hillary", "trumpvote", "trumpbag", "xmas2012", "xmas2013",
+            "PAXE2013", "PAXP2013", "PAXE2014", "PAXEP2014", "PAXPP2014", "PAX2015", "HOCAH", "reject", "reject2",
+            "Canadian", "misprint"
+        ];
+
+        var optionsContainer = document.getElementById('card-sets');
+
+        for (let i = 0; i < cardSets.length; i++) {
+            const setName = cardSets[i];
+            const setId = cardSetId[i];
+
+            let setOption = document.createElement('button');
+            setOption.setAttribute('id', `${setId}`);
+            setOption.setAttribute('onClick', `selected('${setId}')`)
+            setOption.innerText = setName;
+            optionsContainer.appendChild(setOption);
+        }
+
+        function selected(element) {
+            var clickedElement = document.getElementById(element);
+            if (clickedElement.hasAttribute('class')) {
+                clickedElement.removeAttribute('class');
+            } else {
+                clickedElement.setAttribute('class', 'selectedOption');
+
+                //Continue button check
+                //base pack check
+                //...other checks
+            }
+        }
+    </script>
+</body>
+
+</html>
