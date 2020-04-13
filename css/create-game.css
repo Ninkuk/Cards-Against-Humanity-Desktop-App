@@ -33,7 +33,7 @@ button {
     transition: all 0.3s ease;
 }
 
-.selectedOption{
+.selectedOption {
     border: 2px solid #00bfa5;
 }
 
@@ -52,4 +52,26 @@ button {
     right: 20px;
     bottom: 20px;
     /* display: none; */
+}
+
+input {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    margin-top: 5px;
+}
+
+.game-login {
+    position: absolute;
+    top: 45%;
+    left: 30%;
+    font-weight: bold;
+    font-size: 100%;
+}
+
+.code-container {
+    margin: 0px 15px;
+    display: inline-block;
 }

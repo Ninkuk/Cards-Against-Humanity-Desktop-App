@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Join Game</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/create-game.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header class="header"></header>
+    <span class="material-icons" id="close-btn" style="color: #FFFFFF;">clear</span>
+    <span class="material-icons" id="min-btn" style="color: #FFFFFF;">remove</span>
+    <span class="material-icons" onclick="javascript:history.back()" id="back-btn"
+        style="color: #FFFFFF; cursor: pointer;">keyboard_backspace</span>
+
+
+    <h1 id="page-title">Join Game</h1>
+
+    <div class="game-login">
+        <div class="code-container">
+            <p>Game Code</p>
+            <input type="text" name="Game Code" id="code">
+        </div>
+        <div class="code-container">
+            <p>Password</p>
+            <input type="text" name="Password" id="password">
+        </div>
+    </div>
+
+    <button id="continue-btn" onclick="window.location.href='gameplay.html'">Continue</button>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        require('./js/renderer.js')
+    </script>
+</body>
+
+</html>
