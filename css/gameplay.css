@@ -16,17 +16,10 @@
     right: 30px;
 
     width: 150px;
-    height: 200px;
+    height: auto;
     border-radius: 10px;
     background-color: #212121;
     padding: 15px;
-}
-
-#score-card h1{
-    position: relative;
-    text-align: center;
-    top: 45px;
-    font-size: 500%;
 }
 
 .white-card {
