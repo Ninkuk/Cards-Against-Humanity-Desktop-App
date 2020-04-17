@@ -52,7 +52,15 @@ document.getElementById('continue-btn').addEventListener('click', () => {
         nameInput.setAttribute('class', 'input-error');
     } else {
         nameInput.removeAttribute('class');
-        prepareDeck();
+
+        //generate random number
+        var gameCode = Math.floor(Math.random() * 90000) + 10000;
+        if (typeof (Storage) !== "undefined") {
+            sessionStorage.setItem('game-code', gameCode);
+        } else {
+            // F's in the chat
+        }
+        prepareDeck(gameCode);
     }
 
     //TODO: add addional pack checks
@@ -61,7 +69,7 @@ document.getElementById('continue-btn').addEventListener('click', () => {
     }
 });
 
-function prepareDeck() {
+function prepareDeck(gameCode) {
     var fs = require('fs');
     var pack = JSON.parse(fs.readFileSync('./json/Full_Pack.json', 'utf8'));
 
@@ -74,17 +82,30 @@ function prepareDeck() {
     }
     blackCards = shuffle(blackCards);
     whiteCards = shuffle(whiteCards);
-    console.log(blackCards);
-    console.log(whiteCards);
-}
+    sessionStorage.setItem('blackCards', JSON.stringify(blackCards));
+    sessionStorage.setItem('whiteCards', JSON.stringify(whiteCards));
 
-whiteCardsIndex = shuffle(obj["Base"]["white"]);
+    blackCardsString = `${blackCards[0]}`
+    whiteCardsString = `${whiteCards[0]}`
 
-var shuffledIndex = `${whiteCardsIndex[0]}`
+    for (let index = 0; index < blackCards.length; index++) {
+        const element = blackCards[index];
+        blackCardsString += ` ${element}`;
+    }
 
-for (let index = 1; index < whiteCardsIndex.length; index++) {
-    const element = whiteCardsIndex[index];
-    shuffledIndex += ` ${element}`
+    for (let index = 0; index < whiteCards.length; index++) {
+        const element = whiteCards[index];
+        whiteCardsString += ` ${element}`;
+    }
+
+    console.log(blackCardsString);
+    console.log(whiteCardsString);
+
+
+    //add to firebase. on success move to lobby
+
+
+    window.location.assign('lobby.html');
 }
 
 function shuffle(array) {
