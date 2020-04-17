@@ -14,8 +14,6 @@ var cardSetId = ["Base", "CAHe1", "CAHe2", "CAHe3", "CAHe4", "CAHe5", "CAHe6", "
     "Canadian", "misprint"
 ];
 
-var optionsContainer = document.getElementById('card-sets');
-
 for (let i = 0; i < cardSets.length; i++) {
     const setName = cardSets[i];
     const setId = cardSetId[i];
@@ -24,7 +22,7 @@ for (let i = 0; i < cardSets.length; i++) {
     setOption.setAttribute('id', `${setId}`);
     setOption.setAttribute('onClick', `selected('${setId}')`)
     setOption.innerText = setName;
-    optionsContainer.appendChild(setOption);
+    document.getElementById('card-sets').appendChild(setOption);
 }
 
 var selectedCategories = [];
@@ -54,14 +52,31 @@ document.getElementById('continue-btn').addEventListener('click', () => {
         nameInput.setAttribute('class', 'input-error');
     } else {
         nameInput.removeAttribute('class');
+        prepareDeck();
     }
 
-    console.log(selectedCategories);
+    //TODO: add addional pack checks
+    if (selectedCategories.length < 1) {
+
+    }
 });
 
+function prepareDeck() {
+    var fs = require('fs');
+    var pack = JSON.parse(fs.readFileSync('./json/Full_Pack.json', 'utf8'));
 
-var fs = require('fs');
-var obj = JSON.parse(fs.readFileSync('./json/Base.json', 'utf8'));
+    //shuffle black and white cards indices
+    var blackCards = [];
+    var whiteCards = []
+    for (let index = 0; index < selectedCategories.length; index++) {
+        blackCards = blackCards.concat(pack[`${selectedCategories[index]}`]["black"]);
+        whiteCards = whiteCards.concat(pack[`${selectedCategories[index]}`]["white"]);
+    }
+    blackCards = shuffle(blackCards);
+    whiteCards = shuffle(whiteCards);
+    console.log(blackCards);
+    console.log(whiteCards);
+}
 
 whiteCardsIndex = shuffle(obj["Base"]["white"]);
 
