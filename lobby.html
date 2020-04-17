@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lobby</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/create-game.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header class="header"></header>
+    <span class="material-icons" id="close-btn" style="color: #FFFFFF;">clear</span>
+    <span class="material-icons" id="min-btn" style="color: #FFFFFF;">remove</span>
+
+    <!--  -->
+
+    <div class="left-stuff">
+        <div class="game-code-container">
+            <p style="font-size: 125%;">Game Code</p>
+            <h1 id="game-code">12345 <span class="material-icons" id="copy-btn" style="color: #FFFFFF;">file_copy</span></h1>
+            
+        </div>
+        <div class="people-joined"></div>
+    </div>
+
+    <div class="rules">
+        <h1>Game Rules</h1>
+        <p>To start the game, each player draws ten White Cards.
+            <br><br>
+            The person who most recently pooped begins as the Card Czar and plays a Black Card. The Card Czar reads the
+            question or fill-in-the-blank phrase on the Black Card out loud.
+            <br><br>
+            Everyone else answers the question or fills in the blank by passing one White Card, face down, to the Card
+            Czar.
+            <br><br>
+            The Card Czar shuffles all of the answers and shares each card combination with the group. For full effect,
+            the Card Czar should usually re-read the Black Card before presenting each answer. The Card Czar then picks
+            the funniest play, and whoever submitted it gets one Awesome Point.
+            <br><br>
+            After the round, a new player becomes the Card Czar, and everyone draws back up to ten White Cards.
+        </p>
+    </div>
+
+    <button id="continue-btn" onclick="window.location.href='gameplay.html'">Continue</button>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        require('./js/renderer.js')
+    </script>
+</body>
+
+</html>
