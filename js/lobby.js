@@ -1,4 +1,4 @@
-//user joins and gets an int
+document.getElementById('game-code').innerText = sessionStorage.getItem('game-code');
 
 var myPlayerNum = 0;
 

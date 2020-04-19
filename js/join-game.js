@@ -12,15 +12,51 @@ document.getElementById('continue-btn').addEventListener('click', () => {
         codeInput.setAttribute('class', 'input-error');
     } else {
         codeInput.removeAttribute('class');
-        return;
     }
 
     //verify code and get cards from firebase
+    var collectionRef = db.collection(codeInput.value);
+    collectionRef.doc("cardsIndexes").get().then(function (doc) {
+        if (doc.exists) {
+            sessionStorage.setItem('game-code', codeInput.value);
+            var blackCards = doc.data().blackCards.split(" ");
+            var whiteCards = doc.data().whiteCards.split(" ");
 
+            for (let index = 0; index < blackCards.length; index++) {
+                blackCards[index] = Number(blackCards[index]);
+            }
 
-    var blackCardsString = "406 406 412 413 403 402 411 410 405 400 408 404 401 407 89 399 409";
-    var blackCards = blackCardsString.split(" ");
-    for (let index = 0; index < blackCards.length; index++) {
-        blackCards[index] = Number(blackCards[index]);
-    }
+            for (let index = 0; index < whiteCards.length; index++) {
+                whiteCards[index] = Number(whiteCards[index]);
+            }
+
+            sessionStorage.setItem('blackCards', JSON.stringify(blackCards));
+            sessionStorage.setItem('whiteCards', JSON.stringify(whiteCards));
+        } else {
+            codeInput.setAttribute('class', 'input-error');
+        }
+    });
+
+    collectionRef.get().then(function (doc) {
+        var counter = 0
+        doc.forEach(element => {
+            counter += 1;
+        });
+
+        collectionRef.doc(`player${counter-1}`).set({
+            playerID: counter - 1,
+            wins: 0,
+            name: nameInput.value
+        }).then(function () {
+            if (typeof (Storage) !== "undefined") {
+                sessionStorage.setItem('game-code', codeInput.value);
+                sessionStorage.setItem('playerID', playerNum);
+            } else {
+                // F's in the chat?
+            }
+
+            window.location.assign('lobby.html');
+        });
+    });
+
 });

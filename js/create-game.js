@@ -53,14 +53,31 @@ document.getElementById('continue-btn').addEventListener('click', () => {
     } else {
         nameInput.removeAttribute('class');
 
+        var deck = prepareDeck(gameCode);
+
         //generate random number
         var gameCode = Math.floor(Math.random() * 90000) + 10000;
-        if (typeof (Storage) !== "undefined") {
-            sessionStorage.setItem('game-code', gameCode);
-        } else {
-            // F's in the chat
-        }
-        prepareDeck(gameCode);
+
+        //add to firebase. on success move to lobby
+        db.collection(gameCode.toString()).doc("cardsIndexes").set({
+            blackCards: deck[0],
+            whiteCards: deck[1]
+        });
+
+        db.collection(gameCode.toString()).doc("player0").set({
+            playerID: 0,
+            wins: 0,
+            name: name
+        }).then(function () {
+            if (typeof (Storage) !== "undefined") {
+                sessionStorage.setItem('game-code', gameCode);
+                sessionStorage.setItem('playerID', 0);
+            } else {
+                // F's in the chat?
+            }
+
+            window.location.assign('lobby.html');
+        });
     }
 
     //TODO: add addional pack checks
@@ -88,24 +105,17 @@ function prepareDeck(gameCode) {
     blackCardsString = `${blackCards[0]}`
     whiteCardsString = `${whiteCards[0]}`
 
-    for (let index = 0; index < blackCards.length; index++) {
+    for (let index = 1; index < blackCards.length; index++) {
         const element = blackCards[index];
         blackCardsString += ` ${element}`;
     }
 
-    for (let index = 0; index < whiteCards.length; index++) {
+    for (let index = 1; index < whiteCards.length; index++) {
         const element = whiteCards[index];
         whiteCardsString += ` ${element}`;
     }
 
-    console.log(blackCardsString);
-    console.log(whiteCardsString);
-
-
-    //add to firebase. on success move to lobby
-
-
-    window.location.assign('lobby.html');
+    return [blackCardsString, whiteCardsString];
 }
 
 function shuffle(array) {
