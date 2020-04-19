@@ -10,20 +10,35 @@
     left: 69px;
 }
 
-#card-sets {
+.card-sets {
+    /* display: inline-block; */
     width: 95%;
     margin: auto;
-    margin-top: 69px;
-    text-align: center;
+    text-align: left;
+
+}
+
+.card-sets h3{
+    margin-left: 5px;
+    margin-bottom: 5px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#card-sets-required {
+    margin-top: 75px;    
+}
+
+#card-sets-optional{
+    margin-top: 25px;
 }
 
 button {
     cursor: pointer;
     padding: 10px 15px;
-    margin: 10px;
+    margin: 5px;
     border-radius: 5px;
     /* width: 200px; */
-    font-size: 100%;
+    /* font-size: 100%; */
 
 
     background-color: #000000;

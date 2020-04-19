@@ -14,20 +14,32 @@ var cardSetId = ["Base", "CAHe1", "CAHe2", "CAHe3", "CAHe4", "CAHe5", "CAHe6", "
     "Canadian", "misprint"
 ];
 
-for (let i = 0; i < cardSets.length; i++) {
+for (let i = 0; i < 8; i++) {
     const setName = cardSets[i];
     const setId = cardSetId[i];
 
     let setOption = document.createElement('button');
     setOption.setAttribute('id', `${setId}`);
-    setOption.setAttribute('onClick', `selected('${setId}')`)
+    setOption.setAttribute('onClick', `selected('${setId}', true)`)
     setOption.innerText = setName;
-    document.getElementById('card-sets').appendChild(setOption);
+    document.getElementById('card-sets-required').appendChild(setOption);
+}
+
+for (let i = 8; i < cardSetId.length; i++) {
+    const setName = cardSets[i];
+    const setId = cardSetId[i];
+
+    let setOption = document.createElement('button');
+    setOption.setAttribute('id', `${setId}`);
+    setOption.setAttribute('onClick', `selected('${setId}', false)`)
+    setOption.innerText = setName;
+    document.getElementById('card-sets-optional').appendChild(setOption);
 }
 
 var selectedCategories = [];
+var requiredCategories = 0;
 
-function selected(element) {
+function selected(element, required) {
     var clickedElement = document.getElementById(element);
     if (clickedElement.hasAttribute('class')) {
         clickedElement.removeAttribute('class');
@@ -37,25 +49,49 @@ function selected(element) {
             if (category == element) {
                 selectedCategories.splice(index, 1);
             }
+
+            if (required) {
+                console.log("this works?");
+                requiredCategories -= 1;
+            }
         }
     } else {
         clickedElement.setAttribute('class', 'selectedOption');
         selectedCategories.push(element);
+
+        if (required) {
+            console.log("this works?2");
+            requiredCategories += 1;
+        }
     }
 }
 
 
 document.getElementById('continue-btn').addEventListener('click', () => {
+    var categoriesReady = false;
+    var nameReady = false;
+
+    if (requiredCategories > 0) {
+        document.getElementById('required-error').style.color = "rgba(255, 255, 255, 0.75)";
+        categoriesReady = true;
+    } else {
+        document.getElementById('required-error').style.color = "#f44336";
+        categoriesReady = false;
+    }
+
     var nameInput = document.getElementById('name');
     var name = nameInput.value;
     if (name == "") {
         nameInput.setAttribute('class', 'input-error');
+        nameReady = false;
     } else {
         nameInput.removeAttribute('class');
+        nameReady = true;
+    }
 
+    if (categoriesReady && nameReady) {
         document.getElementById('continue-btn').style.backgroundColor = "gray";
         document.getElementById('continue-btn').innerText = "Please wait";
-        
         var deck = prepareDeck(gameCode);
 
         //generate random number
@@ -95,7 +131,7 @@ function prepareDeck(gameCode) {
 
     //shuffle black and white cards indices
     var blackCards = [];
-    var whiteCards = []
+    var whiteCards = [];
     for (let index = 0; index < selectedCategories.length; index++) {
         blackCards = blackCards.concat(pack[`${selectedCategories[index]}`]["black"]);
         whiteCards = whiteCards.concat(pack[`${selectedCategories[index]}`]["white"]);
@@ -105,18 +141,8 @@ function prepareDeck(gameCode) {
     sessionStorage.setItem('blackCards', JSON.stringify(blackCards));
     sessionStorage.setItem('whiteCards', JSON.stringify(whiteCards));
 
-    blackCardsString = `${blackCards[0]}`
-    whiteCardsString = `${whiteCards[0]}`
-
-    for (let index = 1; index < blackCards.length; index++) {
-        const element = blackCards[index];
-        blackCardsString += ` ${element}`;
-    }
-
-    for (let index = 1; index < whiteCards.length; index++) {
-        const element = whiteCards[index];
-        whiteCardsString += ` ${element}`;
-    }
+    blackCardsString = blackCards.join(" ");
+    whiteCardsString = whiteCards.join(" ");
 
     return [blackCardsString, whiteCardsString];
 }
