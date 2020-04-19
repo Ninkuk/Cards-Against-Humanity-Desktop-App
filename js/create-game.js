@@ -53,10 +53,13 @@ document.getElementById('continue-btn').addEventListener('click', () => {
     } else {
         nameInput.removeAttribute('class');
 
+        document.getElementById('continue-btn').style.backgroundColor = "gray";
+        document.getElementById('continue-btn').innerText = "Please wait";
+        
         var deck = prepareDeck(gameCode);
 
         //generate random number
-        var gameCode = Math.floor(Math.random() * 90000) + 10000;
+        var gameCode = alphanumeric_unique();
 
         //add to firebase. on success move to lobby
         db.collection(gameCode.toString()).doc("cardsIndexes").set({
@@ -136,4 +139,10 @@ function shuffle(array) {
     }
 
     return array;
+}
+
+function alphanumeric_unique() {
+    return Math.random().toString(36).split('').filter(function (value, index, self) {
+        return self.indexOf(value) === index;
+    }).join('').substr(2, 6).toUpperCase();
 }

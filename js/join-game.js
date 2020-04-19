@@ -18,6 +18,9 @@ document.getElementById('continue-btn').addEventListener('click', () => {
     var collectionRef = db.collection(codeInput.value);
     collectionRef.doc("cardsIndexes").get().then(function (doc) {
         if (doc.exists) {
+            document.getElementById('continue-btn').style.backgroundColor = "gray";
+            document.getElementById('continue-btn').innerText = "Please wait";
+
             sessionStorage.setItem('game-code', codeInput.value);
             var blackCards = doc.data().blackCards.split(" ");
             var whiteCards = doc.data().whiteCards.split(" ");
@@ -50,7 +53,7 @@ document.getElementById('continue-btn').addEventListener('click', () => {
         }).then(function () {
             if (typeof (Storage) !== "undefined") {
                 sessionStorage.setItem('game-code', codeInput.value);
-                sessionStorage.setItem('playerID', playerNum);
+                sessionStorage.setItem('playerID', counter - 1);
             } else {
                 // F's in the chat?
             }

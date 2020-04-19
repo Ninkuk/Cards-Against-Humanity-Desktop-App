@@ -1,4 +1,11 @@
-document.getElementById('game-code').innerText = sessionStorage.getItem('game-code');
+const {
+    clipboard
+} = require('electron');
+
+var gameCode = sessionStorage.getItem('game-code')
+
+
+document.getElementById('game-code').innerText = gameCode;
 
 var myPlayerNum = 0;
 
@@ -19,3 +26,8 @@ for (let index = startIndex; index < endIndex + 1; index++) {
 }
 
 sessionStorage.setItem('myHand', JSON.stringify(myHand));
+
+document.getElementById('copy-btn').addEventListener('click', () => {
+    clipboard.writeText(gameCode);
+});
+
