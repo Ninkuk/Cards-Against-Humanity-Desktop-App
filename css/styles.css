@@ -21,9 +21,14 @@ header {
     color: #FFFFFF;
 }
 
-.text-white {
+.text-black {
     color: #000000;
 }
+
+.text-bold {
+    font-weight: bold;
+}
+
 
 .text-center {
     text-align: center;

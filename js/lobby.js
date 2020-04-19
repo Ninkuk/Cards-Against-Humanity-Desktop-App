@@ -31,3 +31,19 @@ document.getElementById('copy-btn').addEventListener('click', () => {
     clipboard.writeText(gameCode);
 });
 
+db.collection(gameCode).where("wins", "==", 0).onSnapshot(function (querySnapshot) {
+    var players = [];
+    querySnapshot.forEach(function (doc) {
+        let p = document.createElement('p');
+        let span1 = document.createElement('span');
+        let span2 = document.createElement('span');
+        span1.setAttribute('class', 'text-bold person-joined');
+        span2.setAttribute('class', 'person-joined');
+        span1.innerText = `${doc.data().name} `;
+        span2.innerText = "has joined";
+        p.appendChild(span1);
+        p.appendChild(span2);
+        document.getElementById('people-list-container').appendChild(p);
+    });
+    console.log("Current players: ", players.join(", "));
+});
