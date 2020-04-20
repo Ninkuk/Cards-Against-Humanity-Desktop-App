@@ -14,22 +14,32 @@ var cardSetId = ["Base", "CAHe1", "CAHe2", "CAHe3", "CAHe4", "CAHe5", "CAHe6", "
     "Canadian", "misprint"
 ];
 
-var optionsContainer = document.getElementById('card-sets');
-
-for (let i = 0; i < cardSets.length; i++) {
+for (let i = 0; i < 8; i++) {
     const setName = cardSets[i];
     const setId = cardSetId[i];
 
     let setOption = document.createElement('button');
     setOption.setAttribute('id', `${setId}`);
-    setOption.setAttribute('onClick', `selected('${setId}')`)
+    setOption.setAttribute('onClick', `selected('${setId}', true)`)
     setOption.innerText = setName;
-    optionsContainer.appendChild(setOption);
+    document.getElementById('card-sets-required').appendChild(setOption);
+}
+
+for (let i = 8; i < cardSetId.length; i++) {
+    const setName = cardSets[i];
+    const setId = cardSetId[i];
+
+    let setOption = document.createElement('button');
+    setOption.setAttribute('id', `${setId}`);
+    setOption.setAttribute('onClick', `selected('${setId}', false)`)
+    setOption.innerText = setName;
+    document.getElementById('card-sets-optional').appendChild(setOption);
 }
 
 var selectedCategories = [];
+var requiredCategories = 0;
 
-function selected(element) {
+function selected(element, required) {
     var clickedElement = document.getElementById(element);
     if (clickedElement.hasAttribute('class')) {
         clickedElement.removeAttribute('class');
@@ -39,37 +49,102 @@ function selected(element) {
             if (category == element) {
                 selectedCategories.splice(index, 1);
             }
+
+            if (required) {
+                console.log("this works?");
+                requiredCategories -= 1;
+            }
         }
     } else {
         clickedElement.setAttribute('class', 'selectedOption');
         selectedCategories.push(element);
+
+        if (required) {
+            console.log("this works?2");
+            requiredCategories += 1;
+        }
     }
 }
 
 
 document.getElementById('continue-btn').addEventListener('click', () => {
+    var categoriesReady = false;
+    var nameReady = false;
+
+    if (requiredCategories > 0) {
+        document.getElementById('required-error').style.color = "rgba(255, 255, 255, 0.75)";
+        categoriesReady = true;
+    } else {
+        document.getElementById('required-error').style.color = "#f44336";
+        categoriesReady = false;
+    }
+
     var nameInput = document.getElementById('name');
     var name = nameInput.value;
     if (name == "") {
         nameInput.setAttribute('class', 'input-error');
+        nameReady = false;
     } else {
         nameInput.removeAttribute('class');
+        nameReady = true;
     }
 
-    console.log(selectedCategories);
+    if (categoriesReady && nameReady) {
+        document.getElementById('continue-btn').style.backgroundColor = "gray";
+        document.getElementById('continue-btn').innerText = "Please wait...";
+        var deck = prepareDeck(gameCode);
+
+        //generate random number
+        var gameCode = alphanumeric_unique();
+
+        //add to firebase. on success move to lobby
+        db.collection(gameCode.toString()).doc("cardsIndexes").set({
+            blackCards: deck[0],
+            whiteCards: deck[1]
+        });
+
+        db.collection(gameCode.toString()).doc("player0").set({
+            playerID: 0,
+            wins: 0,
+            name: name
+        }).then(function () {
+            if (typeof (Storage) !== "undefined") {
+                sessionStorage.setItem('game-code', gameCode);
+                sessionStorage.setItem('playerID', 0);
+            } else {
+                // F's in the chat?
+            }
+
+            window.location.assign('lobby.html');
+        });
+    }
+
+    //TODO: add addional pack checks
+    if (selectedCategories.length < 1) {
+
+    }
 });
 
+function prepareDeck(gameCode) {
+    var fs = require('fs');
+    var pack = JSON.parse(fs.readFileSync('./json/Full_Pack.json', 'utf8'));
 
-var fs = require('fs');
-var obj = JSON.parse(fs.readFileSync('./json/Base.json', 'utf8'));
+    //shuffle black and white cards indices
+    var blackCards = [];
+    var whiteCards = [];
+    for (let index = 0; index < selectedCategories.length; index++) {
+        blackCards = blackCards.concat(pack[`${selectedCategories[index]}`]["black"]);
+        whiteCards = whiteCards.concat(pack[`${selectedCategories[index]}`]["white"]);
+    }
+    blackCards = shuffle(blackCards);
+    whiteCards = shuffle(whiteCards);
+    sessionStorage.setItem('blackCards', JSON.stringify(blackCards));
+    sessionStorage.setItem('whiteCards', JSON.stringify(whiteCards));
 
-whiteCardsIndex = shuffle(obj["Base"]["white"]);
+    blackCardsString = blackCards.join(" ");
+    whiteCardsString = whiteCards.join(" ");
 
-var shuffledIndex = `${whiteCardsIndex[0]}`
-
-for (let index = 1; index < whiteCardsIndex.length; index++) {
-    const element = whiteCardsIndex[index];
-    shuffledIndex += ` ${element}`
+    return [blackCardsString, whiteCardsString];
 }
 
 function shuffle(array) {
@@ -90,4 +165,10 @@ function shuffle(array) {
     }
 
     return array;
+}
+
+function alphanumeric_unique() {
+    return Math.random().toString(36).split('').filter(function (value, index, self) {
+        return self.indexOf(value) === index;
+    }).join('').substr(2, 6).toUpperCase();
 }
