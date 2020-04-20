@@ -91,7 +91,7 @@ document.getElementById('continue-btn').addEventListener('click', () => {
 
     if (categoriesReady && nameReady) {
         document.getElementById('continue-btn').style.backgroundColor = "gray";
-        document.getElementById('continue-btn').innerText = "Please wait";
+        document.getElementById('continue-btn').innerText = "Please wait...";
         var deck = prepareDeck(gameCode);
 
         //generate random number

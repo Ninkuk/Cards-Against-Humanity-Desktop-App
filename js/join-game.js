@@ -19,7 +19,7 @@ document.getElementById('continue-btn').addEventListener('click', () => {
     collectionRef.doc("cardsIndexes").get().then(function (doc) {
         if (doc.exists) {
             document.getElementById('continue-btn').style.backgroundColor = "gray";
-            document.getElementById('continue-btn').innerText = "Please wait";
+            document.getElementById('continue-btn').innerText = "Please wait...";
 
             sessionStorage.setItem('game-code', codeInput.value);
             var blackCards = doc.data().blackCards.split(" ");

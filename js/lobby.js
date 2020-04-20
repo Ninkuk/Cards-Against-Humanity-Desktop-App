@@ -1,19 +1,25 @@
-const {
-    clipboard
-} = require('electron');
+// const {
+//     clipboard
+// } = require('electron');
 
 var gameCode = sessionStorage.getItem('game-code')
+var myPlayerID = sessionStorage.getItem('playerID');
+
+if (myPlayerID > 0) {
+    var continuebtn = document.getElementById('continue-btn');
+    continuebtn.style.backgroundColor = "gray";
+    continuebtn.innerText = "Waiting for host...";
+    // continuebtn.disabled = true;
+}
 
 
 document.getElementById('game-code').innerText = gameCode;
 
-var myPlayerNum = 0;
 
-var startIndex = myPlayerNum * 10;
-var endIndex = (myPlayerNum * 10) + 9;
+var startIndex = myPlayerID * 10;
+var endIndex = (myPlayerID * 10) + 9;
 
 var whiteCards = JSON.parse(sessionStorage.getItem('whiteCards'));
-console.log(whiteCards);
 
 var fs = require('fs');
 var pack = JSON.parse(fs.readFileSync('./json/Full_Pack.json', 'utf8'));

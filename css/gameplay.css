@@ -14,7 +14,6 @@
     position: absolute;
     bottom: 20px;
     right: 30px;
-
     width: 150px;
     height: auto;
     border-radius: 10px;
@@ -31,9 +30,8 @@
     background-color: #F5F5F5;
     padding: 15px;
     margin: 0px;
-    
+    vertical-align: bottom;
     box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.75);
-
     transition: all 0.3s ease;
 }
 
@@ -78,4 +76,17 @@
 #player-cards-row-2 .white-card:hover {
     transform: translateY(-10px);
     animation-duration: 0.5s;
+}
+
+#drop-area {
+    display: none;
+    width: 880px;
+    height: 230px;
+    position: absolute;
+    top: 50px;
+    right: 30px;
+    background-color: rgba(0, 191, 255, 0.2);
+    border-radius: 10px;
+    border: 2px dotted lightblue;
+    transition: ease;
 }
