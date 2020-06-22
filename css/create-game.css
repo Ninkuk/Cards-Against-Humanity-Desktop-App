@@ -48,9 +48,7 @@ button {
     transition: all 0.3s ease;
 }
 
-.selectedOption {
-    border: 2px solid #00bfa5;
-}
+
 
 #continue-btn {
     cursor: pointer;

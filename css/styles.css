@@ -53,3 +53,7 @@ header {
 #close-btn:hover {
     cursor: pointer;
 }
+
+.selectedOption {
+    border: 2px solid #00bfa5;
+}
