@@ -10,69 +10,91 @@
 </head>
 
 <body>
-    <header class="header"></header>
-    <span class="material-icons" id="close-btn" style="color: #FFFFFF;">clear</span>
-    <span class="material-icons" id="min-btn" style="color: #FFFFFF;">remove</span>
-    <!-- <span class="material-icons" onclick="javascript:history.back()" id="back-btn"
-        style="color: #FFFFFF; cursor: pointer;">keyboard_backspace</span> -->
+<header class="header"></header>
+<span class="material-icons" id="close-btn" style="color: #FFFFFF;">clear</span>
+<span class="material-icons" id="min-btn" style="color: #FFFFFF;">remove</span>
+<!-- <span class="material-icons" onclick="javascript:history.back()" id="back-btn"
+    style="color: #FFFFFF; cursor: pointer;">keyboard_backspace</span> -->
 
-    <div class="black-card">
-        <p class="card-text" id="black-card-text"></p>
-    </div>
+<div class="black-card">
+    <p class="card-text" id="black-card-text"></p>
+</div>
 
-    <div id="drop-area" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-
-    <div class="player-hand">
-        <div id="player-cards-row-1">
-            <div class="white-card" draggable="true" ondragstart="drag(event, 0)">
-                <p class="card-text" id="white-card-0"></p>
-            </div>
-            <div class="white-card" draggable="true" ondragstart="drag(event, 1)">
-                <p class="card-text" id="white-card-1"></p>
-            </div>
-            <div class="white-card" draggable="true" ondragstart="drag(event, 2)">
-                <p class="card-text" id="white-card-2"></p>
-            </div>
-            <div class="white-card" draggable="true" ondragstart="drag(event, 3)">
-                <p class="card-text" id="white-card-3"></p>
-            </div>
-            <div class="white-card" draggable="true" ondragstart="drag(event, 4)">
-                <p class="card-text" id="white-card-4"></p>
-            </div>
+<div class="player-hand">
+    <div id="player-cards-row-1">
+        <div class="white-card" id="white-card-0">
+            <p class="card-text" id="white-card-text-0"></p>
         </div>
-
-        <div id="player-cards-row-2">
-            <div class="white-card" draggable="true" ondragstart="drag(event, 5)">
-                <p class="card-text" id="white-card-5"></p>
-            </div>
-            <div class="white-card" draggable="true" ondragstart="drag(event, 6)">
-                <p class="card-text" id="white-card-6"></p>
-            </div>
-            <div class="white-card" draggable="true" ondragstart="drag(event, 7)">
-                <p class="card-text" id="white-card-7"></p>
-            </div>
-            <div class="white-card" draggable="true" ondragstart="drag(event, 8)">
-                <p class="card-text" id="white-card-8"></p>
-            </div>
-            <div class="white-card" draggable="true" ondragstart="drag(event, 9)">
-                <p class="card-text" id="white-card-9"></p>
-            </div>
+        <div class="white-card" id="white-card-1">
+            <p class="card-text" id="white-card-text-1"></p>
+        </div>
+        <div class="white-card" id="white-card-2">
+            <p class="card-text" id="white-card-text-2"></p>
+        </div>
+        <div class="white-card" id="white-card-3">
+            <p class="card-text" id="white-card-text-3"></p>
+        </div>
+        <div class="white-card" id="white-card-4">
+            <p class="card-text" id="white-card-text-4"></p>
         </div>
     </div>
 
-    <div id="score-card">
-        <p class="card-text">Your Score: 5 <br> Bader's Score: 0 <br>Arya's Score: 0</p>
+    <div id="player-cards-row-2">
+        <div class="white-card" id="white-card-5">
+            <p class="card-text" id="white-card-text-5"></p>
+        </div>
+        <div class="white-card" id="white-card-6">
+            <p class="card-text" id="white-card-text-6"></p>
+        </div>
+        <div class="white-card" id="white-card-7">
+            <p class="card-text" id="white-card-text-7"></p>
+        </div>
+        <div class="white-card" id="white-card-8">
+            <p class="card-text" id="white-card-text-8"></p>
+        </div>
+        <div class="white-card" id="white-card-9">
+            <p class="card-text" id="white-card-text-9"></p>
+        </div>
     </div>
+</div>
 
-    <!-- <script src="js/main.js"></script> -->
-    <script src="js/gameplay.js"></script>
-    <script>
-        require('./js/renderer.js')
-    </script>
+<button id="continue-btn">Submit</button>
 
-    <script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
 
-    </script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyD5N3Nez3ANsMs550_AtFtpkOxmX6lceiI",
+        authDomain: "cah-desktop-app.firebaseapp.com",
+        databaseURL: "https://cah-desktop-app.firebaseio.com",
+        projectId: "cah-desktop-app",
+        storageBucket: "cah-desktop-app.appspot.com",
+        messagingSenderId: "826235907227",
+        appId: "1:826235907227:web:19352eb9f1cc969ba0ea3e",
+        measurementId: "G-8XY5VQ5J22"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    const db = firebase.firestore();
+</script>
+
+<script src="js/gameplay.js"></script>
+<script>
+    require('./js/renderer.js')
+</script>
+
+<script>
+
+</script>
 </body>
 
 </html>

@@ -1,29 +1,31 @@
 document.getElementById('continue-btn').addEventListener('click', () => {
-    var nameInput = document.getElementById('name');
-    var codeInput = document.getElementById('code');
+    const nameInput = document.getElementById('name');
+    const codeInput = document.getElementById('code');
 
-    if (nameInput.value == "") {
+    //TODO add check for duplicate names
+
+    if (nameInput.value === "") {
         nameInput.setAttribute('class', 'input-error');
     } else {
         nameInput.removeAttribute('class');
     }
 
-    if (codeInput.value == "") {
+    if (codeInput.value === "") {
         codeInput.setAttribute('class', 'input-error');
     } else {
         codeInput.removeAttribute('class');
     }
 
     //verify code and get cards from firebase
-    var collectionRef = db.collection(codeInput.value);
+    const collectionRef = db.collection(codeInput.value);
     collectionRef.doc("cardsIndexes").get().then(function (doc) {
         if (doc.exists) {
             document.getElementById('continue-btn').style.backgroundColor = "gray";
             document.getElementById('continue-btn').innerText = "Please wait...";
 
             sessionStorage.setItem('game-code', codeInput.value);
-            var blackCards = doc.data().blackCards.split(" ");
-            var whiteCards = doc.data().whiteCards.split(" ");
+            const blackCards = doc.data().blackCards.split(" ");
+            const whiteCards = doc.data().whiteCards.split(" ");
 
             for (let index = 0; index < blackCards.length; index++) {
                 blackCards[index] = Number(blackCards[index]);
@@ -40,26 +42,26 @@ document.getElementById('continue-btn').addEventListener('click', () => {
         }
     });
 
-    collectionRef.get().then(function (doc) {
-        var counter = 0
-        doc.forEach(element => {
-            counter += 1;
-        });
+    // get counter then create player and update counter
+    collectionRef.doc("gameStats").get().then(function (doc) {
+        let counter = doc.data().playerCounter;
+        console.log(counter);
 
-        collectionRef.doc(`player${counter-1}`).set({
-            playerID: counter - 1,
+        collectionRef.doc(`player${counter}`).set({
+            playerID: counter,
             wins: 0,
             name: nameInput.value
         }).then(function () {
             if (typeof (Storage) !== "undefined") {
                 sessionStorage.setItem('game-code', codeInput.value);
-                sessionStorage.setItem('playerID', counter - 1);
-            } else {
-                // F's in the chat?
+                sessionStorage.setItem('playerID', counter);
             }
+
+            collectionRef.doc("gameStats").update({
+                playerCounter: counter + 1
+            });
 
             window.location.assign('lobby.html');
         });
     });
-
 });
