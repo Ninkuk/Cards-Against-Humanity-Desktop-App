@@ -1,26 +1,53 @@
-var fs = require('fs');
-var pack = JSON.parse(fs.readFileSync('./json/Full_Pack.json', 'utf8'));
+const fs = require('fs');
+const pack = JSON.parse(fs.readFileSync('./json/Full_Pack.json', 'utf8'));
 
-var blackCards = JSON.parse(sessionStorage.getItem('blackCards'));
-var myHand = JSON.parse(sessionStorage.getItem('myHand'));
+const blackCards = JSON.parse(sessionStorage.getItem('blackCards'));
+const myHand = JSON.parse(sessionStorage.getItem('myHand'));
+const gameCode = sessionStorage.getItem('game-code');
+const myPlayerID = sessionStorage.getItem('playerID');
 
-let firstBlackCard = pack["blackCards"][blackCards[0]];
-document.getElementById('black-card-text').innerText = firstBlackCard["text"];
+const numberOfRounds = 8;
+const numberOfPlayers = 5;
 
-let card = document.getElementsByClassName("white-card");
-let cardsAllowed = firstBlackCard["pick"];
+let collectionRef = db.collection(gameCode);
+collectionRef.doc("gameStats").onSnapshot(function (doc) {
+    let counter = doc.data().playerCounter;
+    let currentRound = doc.data().currentRound;
+
+    if ((myPlayerID + 1) % (currentRound) === 0) {
+        czarDisplay();
+    } else {
+        plebView();
+    }
+
+    let blackCard = pack["blackCards"][blackCards[currentRound]];
+    document.getElementById('black-card-text').innerText = blackCard["text"];
+});
+
+let cards = document.getElementsByClassName("white-card");
+
+function czarDisplay() {
+    cards.forEach(element => element.onmousedown = new Function("return false"));
+}
+
+function plebView() {
+
+
+}
+
+let cardsAllowed = blackCard["pick"];
 let cardsSelectedCount = 0;
-for (let i = 0; i < card.length; i++) {
+for (let i = 0; i < cards.length; i++) {
 
-    card[i].addEventListener("click", () => {
-        if (card[i].classList.contains("selectedOption")) {
-            card[i].classList.remove("selectedOption");
+    cards[i].addEventListener("click", () => {
+        if (cards[i].classList.contains("selectedOption")) {
+            cards[i].classList.remove("selectedOption");
             cardsSelectedCount--;
         } else if (cardsSelectedCount < cardsAllowed) {
-            card[i].classList.add("selectedOption")
+            cards[i].classList.add("selectedOption")
             cardsSelectedCount++;
         }
-    })
+    });
 }
 
 for (let index = 0; index < 10; index++) {
